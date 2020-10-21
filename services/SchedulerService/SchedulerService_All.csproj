@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <StartupObject>SchedulerService.Program</StartupObject>
+    <Configurations>Debug;Release</Configurations>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BDotNetFramework\Utilities\BCloudServiceUtilities-BDatabaseService-GC\BCloudServiceUtilities-BDatabaseService-GC.csproj" />
+    <ProjectReference Include="..\..\..\BDotNetFramework\Utilities\BCloudServiceUtilities-BLoggingService-Basic\BCloudServiceUtilities-BLoggingService-Basic.csproj" />
+    <ProjectReference Include="..\..\..\BDotNetFramework\Utilities\BCloudServiceUtilities-BTracingService-GC\BCloudServiceUtilities-BTracingService-GC.csproj" />
+    <ProjectReference Include="..\..\..\BDotNetFramework\Utilities\BCloudServiceUtilities\BCloudServiceUtilities.csproj" />
+    <ProjectReference Include="..\..\..\BDotNetFramework\Utilities\BWebServiceUtilities-GC\BWebServiceUtilities-GC.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\..\..\BDotNetFramework\Services\BServiceUtilities\BServiceUtilities.projitems" Label="Shared" />
+
+  <Import Project="..\..\..\BDotNetFramework\Services\BServiceUtilities-TracingService-GC\BServiceUtilities-TracingService-GC.projitems" Label="Shared" />
+
+  <Import Project="..\..\..\BDotNetFramework\Services\BServiceUtilities-DatabaseService-GC\BServiceUtilities-DatabaseService-GC.projitems" Label="Shared" />
+
+  <Import Project="..\..\..\BDotNetFramework\Utilities\ServiceUtilities_All\ServiceUtilities_All.projitems" Label="Shared" />
+
+</Project>
