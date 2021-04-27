@@ -51,14 +51,20 @@ namespace SchedulerService
 
             string InternalPrivateKey = ServInit.RequiredEnvironmentVariables["INTERNAL_CALL_PRIVATE_KEY"];
 
+            var RootPath = "/";
+            if (ServInit.RequiredEnvironmentVariables["DEPLOYMENT_BRANCH_NAME"] != "master" && ServInit.RequiredEnvironmentVariables["DEPLOYMENT_BRANCH_NAME"] != "development")
+            {
+                RootPath = "/" + ServInit.RequiredEnvironmentVariables["DEPLOYMENT_BRANCH_NAME"] + "/";
+            }
+
             /*
             * Web-http service initialization
             */
             var WebServiceEndpoints = new List<BWebPrefixStructure>()
             {
-                new BWebPrefixStructure(new string[] { "/scheduler/internal/schedule*" }, () => new ScheduleRequest(InternalPrivateKey, ServInit.DatabaseService)),
-                new BWebPrefixStructure(new string[] { "/scheduler/internal/unschedule*" }, () => new UnscheduleRequest(InternalPrivateKey, ServInit.DatabaseService)),
-                new BWebPrefixStructure(new string[] { "/scheduler/internal/on_minute_call*" }, () => new OnMinuteCallRequest(InternalPrivateKey, ServInit.DatabaseService))
+                new BWebPrefixStructure(new string[] { RootPath + "scheduler/internal/schedule*" }, () => new ScheduleRequest(InternalPrivateKey, ServInit.DatabaseService)),
+                new BWebPrefixStructure(new string[] { RootPath + "scheduler/internal/unschedule*" }, () => new UnscheduleRequest(InternalPrivateKey, ServInit.DatabaseService)),
+                new BWebPrefixStructure(new string[] { RootPath + "scheduler/internal/on_minute_call*" }, () => new OnMinuteCallRequest(InternalPrivateKey, ServInit.DatabaseService))
             };
             var BWebService = new BWebService(WebServiceEndpoints.ToArray(), ServInit.ServerPort/*, ServInit.TracingService*/);
             BWebService.Run((string Message) =>
