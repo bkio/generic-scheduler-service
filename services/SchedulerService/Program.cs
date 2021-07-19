@@ -31,9 +31,8 @@ namespace SchedulerService
             if (!BServiceInitializer.Initialize(out BServiceInitializer ServInit,
                 new string[][]
                 {
-                    //new string[] { "MONGODB_CONNECTION_STRING" },
-                    new string[] { "MONGODB_CLIENT_CONFIG" },
-                    new string[] { "MONGODB_PASSWORD" },
+                    new string[] { "MONGODB_CLIENT_CONFIG", "MONGODB_CONNECTION_STRING", "MONGODB_HOST" },
+                    new string[] { "MONGODB_PASSWORD", "MONGODB_PORT" },
                     new string[] { "MONGODB_DATABASE" },
 
                     new string[] { "DEPLOYMENT_BRANCH_NAME" },
